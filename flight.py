@@ -17,7 +17,7 @@ class DomesticFlight(Flight):
         super().__init__(id, destination, price)
 
     def flight_information(self):
-        return f"Belföldi járat - Azonosító: {self.id}, Úticél: {self.destination}, Jegyár: {self.price} Ft\n"
+        return f"Belföldi járat - Azonosító: {self.id}, Úticél: {self.destination}, Jegyár: {self.price} Ft"
 
 
 class InternationalFlight(Flight):
@@ -25,8 +25,4 @@ class InternationalFlight(Flight):
         super().__init__(id, destination, price)
 
     def flight_information(self):
-        return f"Nemzetközi járat - Azonosító: {self.id}, Úticél: {self.destination}, Jegyár: {self.price} Ft\n"
-
-
-def flights_init():
-    pass
+        return f"Nemzetközi járat - Azonosító: {self.id}, Úticél: {self.destination}, Jegyár: {self.price} Ft"
