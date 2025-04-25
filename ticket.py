@@ -4,4 +4,4 @@ class Ticket:
         self.flight = flight
 
     def ticket_information(self):
-        return f"Foglalás: Utas neve: {self.passenger}, Járat: {self.flight.id}, Célállomás: {self.flight.destination}, Jegyár: {self.flight.price} Ft"
+        return f"\n UTAS: {self.passenger}\n Járat: {self.flight.id}\n Úticél: {self.flight.destination}\n Indulás: {self.flight.time_from}\n Érkezés: {self.flight.time_to}\n Menetidő: {self.flight.time_duration}\n Jegyár: {self.flight.price} Ft\n"

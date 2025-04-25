@@ -5,9 +5,9 @@ from booking import Booking
 
 
 def flights_init(airline):
-    airline.flight_append(DomesticFlight("A111", "Debrecen", 19490))
-    airline.flight_append(InternationalFlight("A222", "London", 46890))
-    airline.flight_append(DomesticFlight("A333", "Budapest", 23290))
+    airline.flight_append(DomesticFlight("ML-D-1", "Debrecen", 19490, "06:15", "06:45", "00:30"))
+    airline.flight_append(InternationalFlight("ML-N-2", "London", 46890, "09:35", "11:25", "01:50"))
+    airline.flight_append(InternationalFlight("ML-N-3", "Bécs", 35290, "14:05", "15:15", "01:10"))
 
     return airline
 
@@ -26,7 +26,7 @@ def bookings_init(airline):
 
 def main() -> None:
 
-    airline = flights_init(Airline("Betyár Társaság", "A"))
+    airline = flights_init(Airline("MALÉV", "ML"))
     booking_system = bookings_init(airline)
 
     input()
