@@ -4,7 +4,6 @@ MENU_ITEMS_MAIN = [[1, "Járatok"], [2, "Foglalás"], [3, "Lemondás"], [4, "Já
 
 
 def menu_main_print() -> None:
-    clear_screen()
     for menu_item in MENU_ITEMS_MAIN:
         if menu_item[0] == 9:
             print(f"\n{menu_item[0]} - {menu_item[1]}")
@@ -33,6 +32,8 @@ def menu_sub_print(menu_selected, booking_system, airline) -> None:
                 print("### FOGLALÁS ###\n")
                 name = input("Kérem adja meg a nevét: ").strip()
                 if name and name.replace(" ", "").isalpha():
+                    clear_screen()
+                    print("### FOGLALÁS ###\n")
                     break
                 else:
                     clear_screen()
@@ -147,12 +148,27 @@ def menu_sub_print(menu_selected, booking_system, airline) -> None:
         clear_screen()
         print("A program bezárult.")
         input("\nA folytatáshoz kérem nyomjon meg egy billentyűt...")
+        exit()
 
 
 def menu_main(booking_system, airline) -> None:
     menu_selected = 0
 
+    menu_items_id = []
+    for i in MENU_ITEMS_MAIN:
+        menu_items_id.append(i[0])
+
+    clear_screen()
     while menu_selected != 9:
-        menu_main_print()
-        menu_selected = int(input("\nVálasszon egy menüpontot: "))
-        menu_sub_print(menu_selected, booking_system, airline)
+        while True:
+            menu_main_print()
+            menu_selected = input("\nVálasszon egy menüpontot: ")
+            if menu_selected.isdigit() and int(menu_selected) in menu_items_id:
+                clear_screen()
+                break
+            else:
+                clear_screen()
+                print("Kérem csak egész számot adjon meg!\n")
+
+        menu_sub_print(int(menu_selected), booking_system, airline)
+        clear_screen()
