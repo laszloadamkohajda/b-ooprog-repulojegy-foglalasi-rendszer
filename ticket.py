@@ -4,7 +4,6 @@ class Ticket:
         self.flight = flight
 
     def __str__(self):
-        """Az objektum szöveges reprezentációja."""
         return (
             f"Utas: {self.passenger}\n"
             f"Járat: {self.flight.id}\n"
@@ -16,5 +15,4 @@ class Ticket:
         )
 
     def ticket_information(self):
-        """Visszaadja a jegy információit."""
         return str(self)
