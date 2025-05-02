@@ -29,7 +29,6 @@ def main() -> None:
     airline = flights_init(Airline("MALÉV", "ML"))
     booking_system = bookings_init(airline)
 
-    input()
     menu_main(booking_system, airline)
 
 
