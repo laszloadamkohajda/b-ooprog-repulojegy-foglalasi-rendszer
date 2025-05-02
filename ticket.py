@@ -8,11 +8,19 @@ class Ticket:
             f"Utas: {self.passenger}\n"
             f"Járat: {self.flight.id}\n"
             f"Úticél: {self.flight.destination}\n"
-            f"Indulás: {self.flight.time_from}\n"
-            f"Érkezés: {self.flight.time_to}\n"
-            f"Menetidő: {self.flight.time_duration}\n"
+            f"Indulás: {self.flight.departure_time}\n"
+            f"Érkezés: {self.flight.arrival_time}\n"
+            f"Menetidő: {self.flight.duration}\n"
             f"Jegyár: {self.flight.price} Ft"
         )
 
     def ticket_information(self):
-        return str(self)
+        return {
+            "passenger": self.passenger,
+            "flight_id": self.flight.id,
+            "destination": self.flight.destination,
+            "departure_time": self.flight.departure_time,
+            "arrival_time": self.flight.arrival_time,
+            "duration": self.flight.duration,
+            "price": self.flight.price,
+        }
