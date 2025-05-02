@@ -16,7 +16,7 @@ def bookings_init(airline):
     booking_system = Booking()
     booking_system.ticket_book("Gipsz Jakab", airline.flights[0])
     booking_system.ticket_book("Kemp Elek", airline.flights[1])
-    booking_system.ticket_book("Kukor Ica", airline.flights[0])
+    booking_system.ticket_book("Kemp Elek", airline.flights[0])
     booking_system.ticket_book("Akciós Áron", airline.flights[0])
     booking_system.ticket_book("Lassú Anett", airline.flights[1])
     booking_system.ticket_book("Minta Márton", airline.flights[2])
