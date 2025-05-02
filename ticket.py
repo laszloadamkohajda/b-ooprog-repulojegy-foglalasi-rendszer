@@ -3,5 +3,18 @@ class Ticket:
         self.passenger = passenger
         self.flight = flight
 
+    def __str__(self):
+        """Az objektum szöveges reprezentációja."""
+        return (
+            f"Utas: {self.passenger}\n"
+            f"Járat: {self.flight.id}\n"
+            f"Úticél: {self.flight.destination}\n"
+            f"Indulás: {self.flight.time_from}\n"
+            f"Érkezés: {self.flight.time_to}\n"
+            f"Menetidő: {self.flight.time_duration}\n"
+            f"Jegyár: {self.flight.price} Ft"
+        )
+
     def ticket_information(self):
-        return f"\n UTAS: {self.passenger}\n Járat: {self.flight.id}\n Úticél: {self.flight.destination}\n Indulás: {self.flight.time_from}\n Érkezés: {self.flight.time_to}\n Menetidő: {self.flight.time_duration}\n Jegyár: {self.flight.price} Ft\n"
+        """Visszaadja a jegy információit."""
+        return str(self)
