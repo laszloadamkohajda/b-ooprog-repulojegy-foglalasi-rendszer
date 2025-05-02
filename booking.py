@@ -10,11 +10,17 @@ class Booking:
         self.bookings.append(booking)
         return f"A foglalás sikeresen megtörtént! Ár: {flight.price} Ft"
 
-    def ticket_cancel(self, passenger, flight):
+    def ticket_cancel(self, passenger, flight_id):
+        booking_to_remove = None
         for booking in self.bookings:
-            if booking.passenger == passenger and booking.flight.id == flight:
-                self.bookings.remove(booking)
-                return "A foglalás sikeresen lemondva!"
+            if booking.passenger == passenger and booking.flight.id == flight_id:
+                booking_to_remove = booking
+                break
+
+        if booking_to_remove:
+            self.bookings.remove(booking_to_remove)
+            return "A foglalás sikeresen lemondva!"
+
         return "Nem található foglalás a megadott adatokkal."
 
     def bookings_list(self):

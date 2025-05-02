@@ -9,8 +9,12 @@ class Airline:
 
     def flight_information(self):
         if not self.flights:
-            return "Nincsenek aktuális járatok."
-        return [flight.flight_information() for flight in self.flights]
+            return ["Nincsenek aktuális járatok."]
+
+        flight_info_list = []
+        for flight in self.flights:
+            flight_info_list.append(flight.flight_information())
+        return flight_info_list
 
     def flight_id(self):
         return self.flights
