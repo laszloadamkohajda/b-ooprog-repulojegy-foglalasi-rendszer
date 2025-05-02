@@ -13,28 +13,85 @@ def menu_main_print() -> None:
 
 
 def menu_sub_print(menu_selected, booking_system, airline) -> None:
-    if menu_selected == 1:
+    if menu_selected == 1:  # SHOW FLIGHTS
         clear_screen()
-        print("Járatok\n")
+        print("### JÁRATOK ###\n")
         for flight_item in airline.flight_information():
             print(f"{flight_item}")
         input()
 
-    elif menu_selected == 2:
+    elif menu_selected == 2:  # BOOK FLIGHT
         clear_screen()
-        print("Foglalások\n")
+        print("### FOGLALÁSOK ###\n")
         for booking_item in booking_system.bookings_list():
             print(f"{booking_item}")
         input()
 
-    elif menu_selected == 3:
+    elif menu_selected == 3:  # CANCEL FLIGHT
         clear_screen()
-        print("Lemondás\n")
+        print("### LEMONDÁS ###")
+
+        passenger_list = []
+        for booking_item in booking_system.bookings:
+            passenger_list.append(booking_item.passenger)
+
+        while True:
+            print("\nElérhető utasok listája:")
+            for passenger_name in passenger_list:
+                print(f" - {passenger_name}")
+            name = input("\nAdja meg az utas nevét: ")
+            clear_screen()
+
+            if name not in passenger_list:
+                print("A név nem szerepel az utaslistán. Kérlek, adj meg egy érvényes nevet.")
+            else:
+                break
+
+        clear_screen()
+        print("### JÁRATAIM ###\n")
+        for booking_item in booking_system.bookings_list():
+            if name in booking_item:
+                print(f"{booking_item}")
+
+        id = input("Adja meg a lemondani kívánt járatot: ")
+        clear_screen()
+
+        verification = input(
+            f"Biztosan le szeretné mondani a {name} nevére és {id} járatra szóló foglalást? (Igen/Nem): "
+        )
+        if verification.lower() == "igen":
+            clear_screen()
+            print(booking_system.ticket_cancel(name, id))
+        else:
+            print("Nem történt lemondás.")
+
         input()
 
-    elif menu_selected == 4:
+    elif menu_selected == 4:  # SHOW "MY" TICKETS
         clear_screen()
-        print("Járataim\n")
+        print("### JÁRATAIM ###")
+
+        passenger_list = []
+        for booking_item in booking_system.bookings:
+            passenger_list.append(booking_item.passenger)
+
+        while True:
+            print("\nElérhető utasok listája:")
+            for passenger_name in passenger_list:
+                print(f" - {passenger_name}")
+            name = input("\nAdja meg az utas nevét: ")
+            clear_screen()
+
+            if name not in passenger_list:
+                print("A név nem szerepel az utaslistán. Kérlek, adj meg egy érvényes nevet.")
+            else:
+                break
+
+        clear_screen()
+        print("### JÁRATAIM ###\n")
+        for booking_item in booking_system.bookings_list():
+            if name in booking_item:
+                print(f"{booking_item}")
         input()
 
     elif menu_selected == 9:
