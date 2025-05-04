@@ -16,7 +16,9 @@ def get_valid_name():
         name = input("Kérem adja meg a nevét: ").strip()
         if name and name.replace(" ", "").isalpha():
             return name
-        print("Hibás név! Csak betűket és szóközt tartalmazhat.")
+        else:
+            print("\033[1A\033[K\033[1A\033[K\033[1A")
+            print("Hibás név! Csak betűket és szóközt tartalmazhat.")
 
 
 def get_valid_name_from_list(passenger_list):
@@ -24,7 +26,9 @@ def get_valid_name_from_list(passenger_list):
         name = input("Kérem adja meg az utas nevét: ").strip()
         if name in passenger_list:
             return name
-        print("Hibás utas név! Kérem, válasszon a listában szereplő utasok közül.")
+        else:
+            print("\033[1A\033[K\033[1A\033[K\033[1A")
+            print("Hibás utas név! Kérem, válasszon a listában szereplő utasok közül.")
 
 
 def get_valid_flight_id(flights_list):
@@ -32,7 +36,9 @@ def get_valid_flight_id(flights_list):
         flight_id = input("Kérem adja meg a járat azonosítóját: ").strip()
         if flight_id in flights_list:
             return flight_id
-        print("Hibás járat azonosító! Kérem, válasszon a listában szereplő járatok közül.")
+        else:
+            print("\033[1A\033[K\033[1A\033[K\033[1A")
+            print("Hibás járat azonosító! Kérem, válasszon a listában szereplő járatok közül.")
 
 
 def get_valid_confirmation():
@@ -40,7 +46,9 @@ def get_valid_confirmation():
         confirmation = input("Biztosan végrehajtja ezt a műveletet? (Igen/Nem): ").strip().lower()
         if confirmation in ["igen", "nem"]:
             return confirmation
-        print("Érvénytelen válasz! Csak 'Igen' vagy 'Nem' érték fogadható el.")
+        else:
+            print("\033[1A\033[K\033[1A\033[K\033[1A\033[K\033[1A\033[K\033[2B\033[1A")
+            print("Érvénytelen válasz! Csak 'Igen' vagy 'Nem' érték fogadható el.")
 
 
 def menu_sub_print(menu_selected, booking_system, airline) -> None:
@@ -63,8 +71,14 @@ def menu_sub_print(menu_selected, booking_system, airline) -> None:
 
     elif menu_selected == 2:  # BOOK FLIGHT
         clear_screen()
-        print("### FOGLALÁS ###\n")
-        name = get_valid_name()
+        name = ""
+        while name == "":
+            print("### FOGLALÁS ###\n")
+            name = get_valid_name()
+            if name != "":
+                clear_screen()
+                print("### FOGLALÁS ###\n")
+                break
 
         # Az airline.flight_id() a járatok objektumait adja vissza
         flights_list = [flight.id for flight in airline.flight_id()]
@@ -82,6 +96,7 @@ def menu_sub_print(menu_selected, booking_system, airline) -> None:
                 print(f"Jegyár: {flight_info['price']} Ft")
                 print("-" * 30, "\n")
 
+            print("\n")
             flight_id = get_valid_flight_id(flights_list)
             if flight_id in flights_list:
                 break
@@ -91,8 +106,10 @@ def menu_sub_print(menu_selected, booking_system, airline) -> None:
         if flight:
             confirmation = get_valid_confirmation()
             if confirmation == "igen":
+                clear_screen()
                 print(booking_system.ticket_book(name, flight))
             else:
+                clear_screen()
                 print("Nem történt foglalás.")
 
         input("\nA folytatáshoz kérem nyomjon meg egy billentyűt...")
@@ -115,6 +132,7 @@ def menu_sub_print(menu_selected, booking_system, airline) -> None:
             input("\nA folytatáshoz kérem nyomjon meg egy billentyűt...")
             return
 
+        print("\n")
         name = get_valid_name_from_list(passenger_list)
         booked_flights = [booking.flight for booking in booking_system.bookings if booking.passenger == name]
 
@@ -133,13 +151,16 @@ def menu_sub_print(menu_selected, booking_system, airline) -> None:
                     f" Menetidő: {flight.duration}\n"
                     f" Jegyár: {flight.price} Ft"
                 )
-                print("-" * 30)
+                print("-" * 30, "\n")
 
+            print("\n")
             flight_id = get_valid_flight_id([f.id for f in booked_flights])
             confirmation = get_valid_confirmation()
             if confirmation == "igen":
+                clear_screen()
                 print(booking_system.ticket_cancel(name, flight_id))
             else:
+                clear_screen()
                 print("Nem történt lemondás.")
 
         input("\nA folytatáshoz kérem nyomjon meg egy billentyűt...")
@@ -157,6 +178,7 @@ def menu_sub_print(menu_selected, booking_system, airline) -> None:
             print("Elérhető utasok:\n")
             for passenger in passenger_list:
                 print(f"- {passenger}")
+            print("\n")
         else:
             print("Nincsenek foglalások a rendszerben.")
             input("\nA folytatáshoz kérem nyomjon meg egy billentyűt...")
