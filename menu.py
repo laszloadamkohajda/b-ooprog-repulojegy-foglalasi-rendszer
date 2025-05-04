@@ -185,6 +185,7 @@ def menu_sub_print(menu_selected, booking_system, airline) -> None:
             return
 
         name = get_valid_name_from_list(passenger_list)
+        print("\033[2A\033[K\033[1B")
         bookings = [booking.ticket_information() for booking in booking_system.bookings if booking.passenger == name]
 
         if not bookings:
