@@ -24,7 +24,7 @@ def bookings_init(airline):
     return booking_system
 
 
-def main() -> None:
+def main():
 
     airline = flights_init(Airline("MALÉV", "ML"))
     booking_system = bookings_init(airline)
